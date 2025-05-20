@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 connectDB();
 
-const allowedOrigins = ['https://threads-clone-aea.vercel.app/'];
+const allowedOrigins = ['https://threads-clone-aea.vercel.app'];
 
 app.use(cors({
   origin: function(origin, callback) {
