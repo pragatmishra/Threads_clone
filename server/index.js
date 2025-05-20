@@ -9,12 +9,27 @@ dotenv.config();
 const app = express();
 connectDB();
 
-app.use(
-  cors({
-    origin:'https://threads-clone-aea.vercel.app',
-    credentials: true,
-  })
-);
+const allowedOrigins = ['https://threads-clone-aea.vercel.app'];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // allow requests with no origin (like curl, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
+// Enable preflight across the board for all routes
+app.options('*', cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);
