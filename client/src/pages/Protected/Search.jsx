@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import ProfileBar from "../../components/search/ProfileBar";
+import ProfileBar from "../../components/search/Profilebar";
 import SearchInput from "../../components/search/SearchInput";
 import { useSelector } from "react-redux";
 
