@@ -195,7 +195,6 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
-
 exports.searchUser = async (req, res) => {
   try {
     const { query } = req.params;
@@ -234,65 +233,3 @@ exports.myInfo = async (req, res) => {
     res.status(400).json({ msg: "Error in myInfo !" });
   }
 };
-//do not change updateProfile fxn
-// exports.updateProfile = async (req, res) => {
-//   try {
-//     const userExists = await User.findById(req.user._id);
-//     if (!userExists) {
-//       return res.status(400).json({ msg: "No such user !" });
-//     }
-
-//     const form = formidable({ multiples: false });
-//     form.parse(req, async (err, fields, files) => {
-//       if (err) {
-//         return res.status(400).json({ msg: "Error in formidable !", err: err });
-//       }
-
-//       if (fields.text) {
-//         await User.findByIdAndUpdate(
-//           req.user._id,
-//           { bio: fields.text },
-//           { new: true }
-//         );
-//       }
-
-//       if (files.media) {
-//         // If there's an existing image, destroy it
-//         if (userExists.public_id) {
-//           await cloudinary.uploader.destroy(userExists.public_id);
-//         }
-
-//         // Upload new image
-//         const uploadedImage = await cloudinary.uploader.upload(
-//           files.media.filepath,
-//           {
-//             folder: "Threads_clone_youtube/Profiles",
-//           }
-//         );
-
-//         if (!uploadedImage) {
-//           return res
-//             .status(400)
-//             .json({ msg: "Error while uploading pic to Cloudinary!" });
-//         }
-
-//         // Update user with new image info
-//         await User.findByIdAndUpdate(
-//           req.user._id,
-//           {
-//             profilePic: uploadedImage.secure_url,
-//             public_id: uploadedImage.public_id,
-//           },
-//           { new: true }
-//         );
-//       }
-
-//       // ✅ FINAL RESPONSE — moved inside form.parse
-//       return res.status(201).json({ msg: "Profile updated successfully!" });
-//     });
-//   } catch (err) {
-//     console.error("Error in updateProfile:", err);
-//     res.status(400).json({ msg: "Error in updateProfile!", err: err.message });
-//   }
-// };
-
