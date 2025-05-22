@@ -8,9 +8,6 @@ const cors = require("cors");
 dotenv.config();
 const app = express();
 connectDB();
-app.get("/", (req, res) => {
-  res.send("Backend is running");
-});
 
 app.use(
   cors({
